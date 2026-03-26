@@ -1,0 +1,355 @@
+Treść wiadomości Gemini
+================================================================================
+TECHNOLOGY STACK DESCRIPTION FOR THE "INTI CHECK" PROJECT
+PROJECT NAME: IntiCheck - AI Medical Assistant
+DESCRIPTION: A discreet web application utilizing artificial intelligence to
+classify skin lesions based on photos. The application provides
+AI classification along with first-aid advice and medical
+recommendations.
+
+================================================================================
+
+BACKEND (SERVER)
+================================================================================
+
+FRAMEWORK: Flask (Python Web Framework)
+
+Minimalist, lightweight framework for building web applications
+
+Route management (HTTP paths)
+
+Serving static files (HTML, CSS, JS, manifest.json, sw.js)
+
+Port: 7860 (Configured for Hugging Face Spaces)
+
+FLASK EXTENSIONS:
+
+Flask-CORS: Handling Cross-Origin Resource Sharing (frontend ↔ backend communication)
+Allows the frontend to support API requests from various sources
+
+MACHINE LEARNING & IMAGE PROCESSING:
+
+TensorFlow: Deep learning library for loading and running the model
+
+Keras: High-level neural networks API (part of TensorFlow)
+
+Model: inti_check_v5_pro.h5 (trained neural network model)
+
+Architecture: Convolutional Neural Network (CNN)
+
+Input: Images resized to 224x224 pixels
+
+Output: Classification into 6 skin lesion categories
+
+Categories: Fungal infection, Nail problems, Pigmented lesions,
+Viral infections, Scabies/Bites, Acne/Purulent lesions
+
+Format: H5 (HDF5 - Hierarchical Data Format)
+
+SUPPORTING LIBRARIES:
+
+NumPy: Numerical processing and array manipulation
+Converts images into numerical matrices
+
+Pillow (PIL): Image processing and manipulation
+Reading files, resizing, format conversion
+
+Werkzeug: WSGI (Web Server Gateway Interface) utilities
+Handling file uploads and HTTP error handling
+
+API ENDPOINTS:
+POST /predict - Accepts a photo, returns classification with:
+* Category (text)
+* Description (what is happening)
+* First-aid advice (doraźnie)
+* Doctor recommendation
+* Confidence score in %
+
+================================================================================
+2. FRONTEND (USER INTERFACE)
+HTML5:
+
+Semantic document structure
+
+Meta tags for responsiveness (viewport, charset UTF-8)
+
+PWA (Progressive Web App) integration
+
+Progressive Enhancement (works without JS)
+
+CSS3:
+
+CSS Variables (--primary-bg, --accent-green, etc.) - fully responsive
+
+Glassmorphism: Frosted glass effect using backdrop-filter blur(16px)
+
+CSS Grid and Flexbox: Flexible, mobile-first layout
+
+Linear Gradients: Beautiful color transitions (teal → dark green)
+
+CSS Animations: Smooth transitions (0.3s)
+
+Responsive Design: Breakpoints for mobile/tablet/desktop
+
+Components:
+
+Hero section with tags and headers
+
+FAQ Section (Accordion)
+
+Image upload card (glass card)
+
+Photography instructions
+
+HIPAA/Agreement compliance checkbox
+
+JAVASCRIPT:
+
+Event listeners for dropzone and file input
+
+Fetch API: Asynchronous communication with the backend
+
+FormData: Image conversion to binary POST request
+
+DOM manipulation: Dynamic UI updates
+
+Image preview: Previewing the photo before sending
+
+FAQ Toggle: Expanding/collapsing FAQ sections
+
+Error handling: Handling network and validation errors
+
+GOOGLE FONTS:
+
+Outfit (weights: 300, 400, 600, 700)
+
+Modern, clean sans-serif font
+
+================================================================================
+3. PROGRESSIVE WEB APP (PWA)
+MANIFEST.JSON:
+
+Web app declaration
+
+Metadata: Name, description, theme colors
+
+Icons: 192x192 and 512x512 pixels (PNG)
+
+Display mode: "standalone" (looks like a native app)
+
+Start URL: /index.html
+
+Theme color: #a3e635 (green accent)
+
+Background color: #0f3f38 (teal)
+
+SERVICE WORKER (sw.js):
+
+Background script enabling offline functionality
+
+Cache API: Resource buffering
+
+Offline browsing (if model is pre-loaded)
+
+Push Notifications: Potential notification support
+
+Background Sync: Background data synchronization
+
+Add-to-Home-Screen installation support
+
+BROWSER SUPPORT:
+
+Conditions: Chrome, Edge, Firefox, Safari (modern browsers)
+
+Cache Storage API
+
+IndexedDB (optional for storing results)
+
+================================================================================
+4. DOCKER & DEPLOYMENT
+DOCKERFILE:
+
+Base Image: python:3.11-slim (lightweight Python 3.11 version)
+
+Size: ~300MB (without the ML model)
+
+Workdir: /app (working directory in the container)
+
+Steps:
+
+Copying requirements.txt
+
+Dependency installation: pip install --no-cache-dir
+
+Copying the entire project
+
+Creating a folder for uploads: /app/uploads
+
+Port exposure: 7860
+
+CMD: Running server.py
+
+HUGGING FACE SPACES:
+
+Integration: Dockerfile is optimized for HF Spaces
+
+Free hosting for public ML projects
+
+Auto-scaling
+
+Port 7860 (default for HF)
+
+REQUIREMENTS.TXT:
+
+flask: Web framework
+
+flask-cors: CORS support
+
+tensorflow: ML framework (≈900MB after installation)
+
+pillow: Image processing
+
+numpy: Numerical computing
+
+werkzeug: WSGI utilities
+
+================================================================================
+5. KNOWLEDGE BASE AND BUSINESS LOGIC
+KNOWLEDGE_BASE:
+
+Python dictionary with 6 categories
+
+Structure:
+{
+index: {
+"category": string,
+"description": string,
+"first_aid": string,
+"doctor": string (specialist recommendation)
+}
+}
+
+Each category contains:
+
+Medical description (what the classification means)
+
+First-aid advice (immediate steps)
+
+Recommended doctor specialty with emoji
+
+Dynamically linked with the ML model results
+
+DATA FLOW:
+
+Frontend: User uploads photo (POST /predict)
+
+Backend: Flask receives the file
+
+Processing: Pillow → resize to 224x224 → normalization
+
+AI: TensorFlow/Keras → predict() → vector of 6 outputs
+
+Interpretation: argmax() → category index, max() → confidence %
+
+Enrichment: Attaching text from KNOWLEDGE_BASE
+
+Response: JSON with results + advice
+
+Frontend: Displaying results to the user
+
+================================================================================
+6. SECURITY AND PRIVACY
+HIPAA COMPLIANCE (Healthcare Privacy):
+
+HIPAA-compliant checkbox on the frontend
+
+Informational (not medical) warnings
+
+Disclaimer: "This is not a medical consultation"
+
+IMAGE UPLOADS:
+
+In-memory processing: processed in RAM without saving to disk
+
+Conversion to RAM buffer
+
+Alpha channel removal (RGBA → RGB)
+
+Normalization: /255.0 (scaling to 0-1 range)
+
+CORS:
+
+Flask-CORS enabled for secure frontend ↔ backend communication
+
+================================================================================
+7. GENERAL ARCHITECTURE
+PROJECT STRUCTURE:
+/
+├── server.py             (Backend - Flask + TensorFlow)
+├── index.html            (Frontend - UI)
+├── sw.js                 (Service Worker)
+├── manifest.json         (PWA config)
+├── inti_check_v5_pro.h5  (ML Model - 900MB+)
+├── requirements.txt      (Python dependencies)
+├── Dockerfile            (Container config)
+└── notes.txt             (documentation)
+
+COMMUNICATION:
+Browser ↔ (HTTP/HTTPS) ↔ Flask Server
+↔ (Local API) ↔ TensorFlow Model
+
+PERFORMANCE:
+
+Inference: ~2-5 seconds (depending on CPU/GPU)
+
+Image: Resize + normalization in RAM
+
+Model cache: Loaded once at startup (warmup)
+
+================================================================================
+8. SUPPORTING TECHNOLOGIES
+PYTHON VERSION: Python 3.11
+OPERATING SYSTEM: Linux (Docker container)
+DATABASE: None (stateless application)
+CACHE: Browser cache (Service Worker)
+CDN: Google Fonts (for typography)
+
+MODERN STANDARDS:
+
+ES6+ JavaScript
+
+CSS Grid/Flexbox
+
+REST API
+
+JSON format
+
+Responsive Web Design
+
+Mobile-First approach
+
+Web Components (potential)
+
+================================================================================
+SUMMARY
+The IntiCheck project is a modern web application combining:
+✓ Deep Learning (TensorFlow/Keras for image classification)
+✓ Responsive frontend (HTML5 + CSS3 + Vanilla JS)
+✓ Progressive Web App (offline capability)
+✓ Lightweight backend (Flask + Python 3.11)
+✓ Containerization (Docker for easy deployment)
+✓ Free hosting (Hugging Face Spaces)
+
+Optimized for:
+
+User privacy (In-memory processing, no DB)
+
+Speed (Model loaded once, inference in 2-5s)
+
+Accessibility (PWA, offline mode)
+
+Mobility (App installable on the home screen)
+
+================================================================================
+Documentation Created: 2026-03-06
+Version: 1.0

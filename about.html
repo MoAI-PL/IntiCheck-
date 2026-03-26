@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - IntiCheck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #0f3f38;
+            --secondary-bg: #1c6158;
+            --accent-green: #a3e635;
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        /* --- NAVIGATION --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 15px;
+            font-weight: 400;
+            transition: color 0.3s;
+        }
+        nav a:hover, nav a.active {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .header-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .header-section h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .header-section span {
+            color: var(--accent-green);
+        }
+        .header-section p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* --- INFO CARDS (GLASSMORPHISM) --- */
+        .info-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: -1;
+            opacity: 0.15;
+        }
+        .info-card h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .info-card p {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .disclaimer {
+            background: rgba(245, 158, 11, 0.15);
+            border-left: 4px solid #f59e0b;
+            padding: 15px 20px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #fcd34d;
+        }
+        .btn-back {
+            display: inline-block;
+            background: var(--accent-green);
+            color: #000;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: transform 0.2s, background 0.3s;
+        }
+        .btn-back:hover {
+            background: #84cc16;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">IntiCheck</a>
+        <nav>
+            <a href="index.html">Application</a>
+            <a href="about.html" class="active">About Us</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Discover <span>IntiCheck</span></h1>
+            <p>Bridging the gap between "Dr. Google" panic and a professional clinical diagnosis.</p>
+        </div>
+
+        <div class="info-card">
+            <h2>Why are we doing this?</h2>
+            <p>Shame and fear are health's greatest enemies. When a concerning lesion appears on our skin—especially in intimate areas—we often delay visiting a doctor. Instead, we search for images online, which usually leads to unnecessary anxiety.</p>
+            <p>We created IntiCheck to provide a <strong>discreet, non-judgmental space</strong>. Our goal is not to replace a physician, but to reduce your stress and motivate you to take the correct medical steps.</p>
+        </div>
+
+        <div class="info-card">
+            <h2>What exactly do we do?</h2>
+            <p>IntiCheck is a digital medical assistant serving as a <strong>Triage system (preliminary screening)</strong>. When you upload a photo of a skin concern, our system rapidly analyzes and classifies it into one of the primary categories (e.g., viral infections, fungal issues, nail pathologies, or suspicious pigmented lesions).</p>
+            <p>Instead of throwing complex medical jargon at you, the app explains in simple terms: <em>"What you might be dealing with, what immediate actions to take (to avoid worsening the condition), and exactly which specialist you should consult."</em></p>
+        </div>
+
+        <div class="info-card">
+            <h2>How does it work under the hood?</h2>
+            <p>The heart of the application is a <strong>Convolutional Neural Network (CNN)</strong> based on the lightweight, optimized <strong>MobileNetV2</strong> architecture. The model doesn't rely on simple guessing—it processes the uploaded image as standardized tensors (224x224 px), subjecting them to mathematical analysis to detect unique patterns across 6 different classes of conditions.</p>
+            <p>To ensure maximum reliability, we applied hard data augmentation during training, and addressed the common issue of medical data imbalance algorithmically using <em>Class Weights</em>.</p>
+            <p>Our backend architecture guarantees complete anonymity. Your photos never touch the server's hard drive. We utilize <strong>In-Memory Processing</strong>—the file is analyzed exclusively in the volatile RAM as a byte stream. Within a fraction of a second after generating the prediction, the image matrix is immediately and permanently destroyed.</p>
+
+            <div class="disclaimer">
+                <strong>Important Note:</strong><br>
+                The current version of the algorithm is in a prototype phase. While the system can effectively recognize core patterns, it may produce errors under unusual lighting or for rare conditions. The AI result is a suggestion only and <strong>never replaces professional medical advice</strong>.
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 60px;">
+            <a href="index.html" class="btn-back">Go to AI Analyzer</a>
+        </div>
+    </div>
+
+</body>
+</html>

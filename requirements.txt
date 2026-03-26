@@ -1,0 +1,15 @@
+# --- Core Web Framework ---
+flask==3.0.2
+flask-cors==4.0.0
+werkzeug==3.0.1
+
+# --- Machine Learning & AI ---
+tensorflow==2.15.0
+numpy==1.26.4
+h5py==3.10.0
+
+# --- Image Processing ---
+pillow==10.2.0
+
+# --- Deployment (Optional but recommended for production) ---
+gunicorn==21.2.0
