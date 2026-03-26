@@ -1,6 +1,6 @@
 # IntiCheck - AI-Powered Skin Condition Triage Tool
 
-**Authors**:[Jan Domański](https://github.com/jaaneeczek), [Damian Cybula]([https://github.com/DdamianC]), [Katarzyna Kuczyńska](https://github.com/kasiakk1) 
+**Authors**:[Jan Domański](https://github.com/jaaneeczek), [Damian Cybula](https://github.com/DdamianC), [Katarzyna Kuczyńska](https://github.com/kasiakk1) 
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/)
