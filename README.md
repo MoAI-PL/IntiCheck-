@@ -5,6 +5,8 @@
 [![Flask](https://img.shields.io/badge/flask-2.0+-blue.svg)](https://flask.palletsprojects.com/)
 [![TensorFlow](https://img.shields.io/badge/tensorflow-2.0+-orange.svg)](https://www.tensorflow.org/)
 
+<img width="2516" height="1318" alt="image" src="https://github.com/user-attachments/assets/4961bcd7-4c43-4db3-96b1-927aeabd3d8d" />
+
 ## 🌟 Project Description
 
 IntiCheck is a discreet AI-powered medical assistant that analyzes skin condition images in seconds. Stop guessing with search engines—let AI provide preliminary classification to guide your next steps toward professional care.
